@@ -1,0 +1,396 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ketcy — Java & Full Stack Developer</title>
+
+  <!-- Google Fonts: Playfair Display for headings, Poppins for body text -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ============================
+       NAVIGATION BAR
+       Sticks to the top when scrolling
+  ============================ -->
+  <nav class="navbar" id="navbar">
+    <a href="#home" class="nav-logo">Zia.</a>
+
+    <!-- Desktop navigation links -->
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home"     class="nav-link">Home</a></li>
+      <li><a href="#about"    class="nav-link">About</a></li>
+      <li><a href="#skills"   class="nav-link">Skills</a></li>
+      <li><a href="#projects" class="nav-link">Projects</a></li>
+      <li><a href="#contact"  class="nav-link">Contact</a></li>
+    </ul>
+
+    <!-- Hamburger button — only shows on mobile -->
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </nav>
+
+
+  <!-- ============================
+       HERO SECTION
+       The first thing visitors see
+  ============================ -->
+  <section class="hero" id="home">
+
+    <!-- Soft decorative circle in the background -->
+    <div class="hero-circle" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <!-- Small label above the name -->
+      <p class="hero-eyebrow">✦ Welcome to my portfolio</p>
+
+      <!-- Main headline -->
+      <h1 class="hero-title">
+        Hi, I'm <span class="highlight">Kethzia</span>
+      </h1>
+
+      <!-- Job title / role -->
+      <p class="hero-subtitle">Aspiring Java &amp; Full Stack Developer</p>
+
+      <!-- Short intro paragraph -->
+      <p class="hero-desc">
+        I'm a Computer Science student who loves building clean, purposeful software.
+        From Java backends to responsive frontends — I craft with care and curiosity.
+      </p>
+
+      <!-- Call-to-action buttons -->
+      <div class="hero-buttons">
+        <a href="#projects" class="btn btn-primary">View Projects</a>
+        <a href="#contact"  class="btn btn-outline">Contact Me</a>
+      </div>
+    </div>
+
+    <!-- Floating tag cloud (purely decorative) -->
+    <div class="hero-tags" aria-hidden="true">
+      <span>Java</span>
+      <span>Spring Boot</span>
+      <span>MySQL</span>
+      <span>HTML &amp; CSS</span>
+      <span>JavaScript</span>
+    </div>
+
+  </section>
+
+
+  <!-- ============================
+       ABOUT SECTION
+  ============================ -->
+  <section class="about section" id="about">
+    <div class="container">
+
+      <!-- Section heading block -->
+      <div class="section-heading fade-in">
+        <p class="section-label">A little about me</p>
+        <h2 class="section-title">The Person <em>Behind</em> the Code</h2>
+      </div>
+
+      <!-- Three about cards -->
+      <div class="about-grid">
+
+        <div class="about-card fade-in">
+          <div class="card-icon">🎓</div>
+          <h3>Student &amp; Developer</h3>
+          <p>
+            I'm pursuing Computer Science with a focus on full-stack development.
+            I enjoy turning complex problems into clean, readable code that works.
+          </p>
+        </div>
+
+        <div class="about-card fade-in">
+          <div class="card-icon">💻</div>
+          <h3>What I Build</h3>
+          <p>
+            I specialise in Java and Spring Boot on the backend, paired with
+            HTML, CSS, and JavaScript on the frontend. I love projects that
+            feel polished and are easy to use.
+          </p>
+        </div>
+
+        <!-- This card spans the full width on larger screens -->
+        <div class="about-card about-card--accent fade-in">
+          <h3 style="color: antiquewhite;">My Goal</h3>
+          <p style="color: antiquewhite;">
+            I want to land a role as a full-stack or backend developer where
+            I can contribute from day one, keep growing fast, and work on
+            projects that make a real difference.
+          </p>
+          <a href="#contact" class="btn btn-primary btn-sm">Let's Connect</a>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================
+       SKILLS SECTION
+  ============================ -->
+  <section class="skills section" id="skills">
+    <div class="container">
+
+      <div class="section-heading fade-in">
+        <p class="section-label">What I work with</p>
+        <h2 class="section-title">My <em>Skills</em></h2>
+      </div>
+
+      <!-- Six skill cards with progress bars -->
+      <div class="skills-grid">
+
+        <div class="skill-card fade-in">
+          <div class="skill-top">
+            <span class="skill-name">HTML5</span>
+            <span class="skill-pct">80%</span>
+          </div>
+          <!-- data-width tells JS how far to animate the bar -->
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="90"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-top">
+            <span class="skill-name">CSS3</span>
+            <span class="skill-pct">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="85"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-top">
+            <span class="skill-name">JavaScript</span>
+            <span class="skill-pct">70%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="75"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-top">
+            <span class="skill-name">Java</span>
+            <span class="skill-pct">85%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="85"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-top">
+            <span class="skill-name">MySQL</span>
+            <span class="skill-pct">75%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="70"></div>
+          </div>
+        </div>
+
+        <div class="skill-card fade-in">
+          <div class="skill-top">
+            <span class="skill-name">Spring Boot</span>
+            <span class="skill-pct">65%</span>
+          </div>
+          <div class="skill-bar">
+            <div class="skill-fill" data-width="65"></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================
+       PROJECTS SECTION
+  ============================ -->
+  <section class="projects section" id="projects">
+    <div class="container">
+
+      <div class="section-heading fade-in">
+        <p class="section-label">Things I've built</p>
+        <h2 class="section-title">Featured <em>Projects</em></h2>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- Project Card 1 -->
+        <article class="project-card fade-in">
+          <p class="project-number">01</p>
+          <h3 class="project-title">Farmer E-Commerce Platform</h3>
+          <p class="project-desc">
+            A full-stack marketplace connecting farmers directly with buyers.
+            Features product listings, a cart system, user auth, and order
+            management — built with Java, Spring Boot, and MySQL.
+          </p>
+          <div class="project-tags">
+            <span>Java</span>
+            <span>Spring Boot</span>
+            <span>MySQL</span>
+            <span>HTML/CSS</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="project-buttons">
+            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            <a href="https://github.com/ketzia05/agri-direct-api" class="btn btn-outline btn-sm">GitHub</a>
+          </div>
+        </article>
+
+        <!-- Project Card 2 -->
+        <article class="project-card fade-in">
+          <p class="project-number">02</p>
+          <h3 class="project-title">Java OOP Programs</h3>
+          <p class="project-desc">
+            A collection of Java applications demonstrating core OOP concepts —
+            inheritance, polymorphism, encapsulation, and abstraction. Includes
+            a library system, student tracker, and bank simulation.
+          </p>
+          <div class="project-tags">
+            <span>Java</span>
+            <span>OOP</span>
+            <span>Collections API</span>
+          </div>
+          <div class="project-buttons">
+            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            <a href="#" class="btn btn-outline btn-sm">GitHub</a>
+          </div>
+        </article>
+
+        <!-- Project Card 3 -->
+        <article class="project-card fade-in">
+          <p class="project-number">03</p>
+          <h3 class="project-title">Personal Portfolio</h3>
+          <p class="project-desc">
+            This very website — built from scratch with only HTML, CSS, and
+            vanilla JavaScript. Fully responsive with smooth scroll, fade
+            animations, and a clean, recruiter-friendly layout.
+          </p>
+          <div class="project-tags">
+            <span>HTML5</span>
+            <span>CSS3</span>
+            <span>JavaScript</span>
+          </div>
+          <div class="project-buttons">
+            <a href="#" class="btn btn-primary btn-sm">View Details</a>
+            <a href="#" class="btn btn-outline btn-sm">GitHub</a>
+          </div>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================
+       CONTACT SECTION
+  ============================ -->
+  <section class="contact section" id="contact">
+    <div class="container">
+
+      <div class="section-heading fade-in">
+        <p class="section-label">Say hello</p>
+        <h2 class="section-title">Get in <em>Touch</em></h2>
+      </div>
+
+      <div class="contact-wrapper">
+
+        <!-- Left: Contact form -->
+        <div class="contact-form-wrap fade-in">
+          <form id="contactForm" novalidate>
+
+            <div class="form-group">
+              <label for="name">Your Name</label>
+              <input type="text" id="name" name="name"
+                     placeholder="Jane Smith" required />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address</label>
+              <input type="email" id="email" name="email"
+                     placeholder="jane@example.com" required />
+            </div>
+
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" rows="5"
+                        placeholder="Let's collaborate…" required></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary btn-full">
+              Send Message ✉
+            </button>
+
+            <!-- Success message, hidden until form is submitted -->
+            <p class="form-success" id="formSuccess">
+              ✅ Message sent! I'll be in touch soon.
+            </p>
+
+          </form>
+        </div>
+
+        <!-- Right: Contact info -->
+        <div class="contact-info fade-in">
+          <p class="contact-intro">
+            I'm open to internship opportunities, freelance projects, or just a
+            friendly chat about tech. Don't hesitate to reach out!
+          </p>
+
+          <ul class="contact-list">
+            <li>
+              <span class="contact-icon">📧</span>
+              <a href="mailto:ketcy@example.com">ketcy@example.com</a>
+            </li>
+            <li>
+              <span class="contact-icon">💼</span>
+              <a href="https://linkedin.com/" target="_blank" rel="noopener">
+                linkedin.com/in/ketcy
+              </a>
+            </li>
+            <li>
+              <span class="contact-icon">🐙</span>
+              <a href="https://github.com/" target="_blank" rel="noopener">
+                github.com/ketcy
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ============================
+       FOOTER
+  ============================ -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <span class="footer-logo">Ketcy.</span>
+      <p class="footer-copy">© 2025 Ketcy — Designed &amp; built with love ♡</p>
+    </div>
+  </footer>
+
+
+  <!-- Back to top button (appears after scrolling down) -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">↑</button>
+
+
+  <!-- JavaScript file -->
+  <script src="script.js"></script>
+
+</body>
+</html>
