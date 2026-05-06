@@ -1,0 +1,943 @@
+/* ================================================
+   KETCY PORTFOLIO — style.css
+   Palette: White / Warm Beige / Deep Maroon
+   Fonts:   Playfair Display + Poppins
+   ================================================ */
+
+
+/* ------------------------------------------------
+   1. CSS VARIABLES (easy to customise colours)
+   ------------------------------------------------ */
+   :root {
+    --white:       #ffffff;
+    --beige:       #f5e6d3;
+    --beige-dark:  #ecdcc6;   /* slightly deeper beige for borders */
+    --maroon:      #6d1f2f;
+    --maroon-dark: #541826;   /* darker maroon for hover states */
+    --text-dark:   #2c1a20;   /* near-black for body text */
+    --text-mid:    #6b4c54;   /* muted mid tone */
+    --text-light:  #a07c88;   /* light hint text */
+  
+    --font-heading: 'Playfair Display', serif;
+    --font-body:    'Poppins', sans-serif;
+  
+    --radius:    12px;
+    --radius-sm:  8px;
+    --shadow:    0 4px 24px rgba(109, 31, 47, 0.08);
+    --shadow-md: 0 8px 40px rgba(109, 31, 47, 0.14);
+    --nav-height: 70px;
+    --transition: 0.3s ease;
+  }
+  
+  
+  /* ------------------------------------------------
+     2. RESET & BASE STYLES
+     ------------------------------------------------ */
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    /* Leave room for the sticky nav when scrolling to anchors */
+    scroll-padding-top: var(--nav-height);
+  }
+  
+  body {
+    background-color: var(--white);
+    color: var(--text-dark);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+  
+  a {
+    text-decoration: none;
+    color: inherit;
+  }
+  
+  ul {
+    list-style: none;
+  }
+  
+  img {
+    max-width: 100%;
+    display: block;
+  }
+  
+  /* Scrollbar — subtle maroon tint */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: var(--beige); }
+  ::-webkit-scrollbar-thumb { background: var(--maroon); border-radius: 3px; }
+  
+  
+  /* ------------------------------------------------
+     3. REUSABLE UTILITIES
+     ------------------------------------------------ */
+  
+  /* Wrapper that centers content and adds padding */
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+  
+  /* Spacing for all main sections */
+  .section {
+    padding: 100px 0;
+  }
+  
+  /* Alternating beige background for visual rhythm */
+  .about,
+  .projects {
+    background-color: var(--beige);
+  }
+  
+  /* Section heading block */
+  .section-heading {
+    text-align: center;
+    margin-bottom: 60px;
+  }
+  
+  .section-label {
+    font-family: var(--font-body);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: 10px;
+  }
+  
+  .section-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 700;
+    color: var(--text-dark);
+    line-height: 1.2;
+  }
+  
+  /* Italic words inside headings */
+  .section-title em {
+    font-style: italic;
+    color: var(--maroon);
+  }
+  
+  
+  /* ------------------------------------------------
+     4. BUTTONS
+     ------------------------------------------------ */
+  .btn {
+    display: inline-block;
+    padding: 13px 30px;
+    border-radius: 50px;       /* pill shape */
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    cursor: pointer;
+    border: 2px solid transparent;
+    transition: all var(--transition);
+    text-align: center;
+  }
+  
+  /* Filled maroon button */
+  .btn-primary {
+    background-color: var(--maroon);
+    color: var(--white);
+    border-color: var(--maroon);
+  }
+  
+  .btn-primary:hover {
+    background-color: var(--maroon-dark);
+    border-color: var(--maroon-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 31, 47, 0.3);
+  }
+  
+  /* Outlined maroon button */
+  .btn-outline {
+    background-color: transparent;
+    color: var(--maroon);
+    border-color: var(--maroon);
+  }
+  
+  .btn-outline:hover {
+    background-color: var(--maroon);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(109, 31, 47, 0.2);
+  }
+  
+  /* Smaller button variant */
+  .btn-sm {
+    padding: 9px 20px;
+    font-size: 0.8rem;
+  }
+  
+  /* Full-width button */
+  .btn-full {
+    width: 100%;
+    display: block;
+  }
+  
+  
+  /* ------------------------------------------------
+     5. FADE-IN ANIMATION (triggered by JS)
+     ------------------------------------------------ */
+  
+  /* Start state: invisible and shifted down */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  
+  /* End state: JS adds this class when element enters view */
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  
+  /* ------------------------------------------------
+     6. NAVBAR
+     ------------------------------------------------ */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--nav-height);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 40px;
+    z-index: 1000;
+    background-color: rgba(255, 255, 255, 0.95);
+    /* Glass effect using backdrop-filter */
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: box-shadow var(--transition);
+  }
+  
+  /* Add a shadow when the user scrolls (class added by JS) */
+  .navbar.scrolled {
+    box-shadow: 0 2px 20px rgba(109, 31, 47, 0.1);
+  }
+  
+  /* Logo text */
+  .nav-logo {
+    font-family: var(--font-heading);
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--maroon);
+    letter-spacing: 0.02em;
+  }
+  
+  /* Desktop link list */
+  .nav-links {
+    display: flex;
+    gap: 36px;
+  }
+  
+  .nav-link {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    position: relative;
+    transition: color var(--transition);
+  }
+  
+  /* Underline that slides in on hover */
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--maroon);
+    border-radius: 2px;
+    transition: width var(--transition);
+  }
+  
+  .nav-link:hover {
+    color: var(--maroon);
+  }
+  
+  .nav-link:hover::after,
+  .nav-link.active::after {
+    width: 100%;
+  }
+  
+  .nav-link.active {
+    color: var(--maroon);
+  }
+  
+  /* Hamburger button (hidden on desktop) */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+  }
+  
+  .hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background-color: var(--maroon);
+    border-radius: 2px;
+    transition: all var(--transition);
+  }
+  
+  /* Animate hamburger into an X when open */
+  .hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .hamburger.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+  
+  
+  /* ------------------------------------------------
+     7. HERO SECTION
+     ------------------------------------------------ */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 60px;
+    padding: var(--nav-height) 80px 80px;
+    position: relative;
+    overflow: hidden;
+    background-color: var(--white);
+  }
+  
+  /* Large soft circle in the background for depth */
+  .hero-circle {
+    position: absolute;
+    width: 560px;
+    height: 560px;
+    background: radial-gradient(circle, var(--beige) 0%, transparent 70%);
+    border-radius: 50%;
+    right: -100px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    z-index: 0;
+  }
+  
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    max-width: 580px;
+  }
+  
+  /* Small text above the main heading */
+  .hero-eyebrow {
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--maroon);
+    margin-bottom: 18px;
+  }
+  
+  /* Main "Hi, I'm Ketcy" heading */
+  .hero-title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-dark);
+    margin-bottom: 16px;
+  }
+  
+  /* The highlighted name in maroon */
+  .highlight {
+    color: var(--maroon);
+    font-style: italic;
+  }
+  
+  /* Role subtitle */
+  .hero-subtitle {
+    font-size: clamp(1rem, 2vw, 1.25rem);
+    font-weight: 500;
+    color: var(--text-mid);
+    margin-bottom: 20px;
+  }
+  
+  /* Short intro paragraph */
+  .hero-desc {
+    font-size: 1rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    max-width: 480px;
+    margin-bottom: 40px;
+  }
+  
+  /* Button row */
+  .hero-buttons {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  
+  /* Floating tech tag cloud (right side decoration) */
+  .hero-tags {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  
+  .hero-tags span {
+    background-color: var(--beige);
+    color: var(--maroon);
+    font-size: 0.82rem;
+    font-weight: 600;
+    padding: 10px 22px;
+    border-radius: 50px;
+    border: 1px solid var(--beige-dark);
+    box-shadow: var(--shadow);
+    transition: transform var(--transition);
+  }
+  
+  .hero-tags span:hover {
+    transform: translateX(6px);
+  }
+  
+  
+  /* ------------------------------------------------
+     8. ABOUT SECTION
+     ------------------------------------------------ */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  
+  .about-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    box-shadow: var(--shadow);
+    border: 1px solid var(--beige-dark);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .about-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* The card that spans both columns */
+  .about-card--accent {
+    grid-column: 1 / -1;
+    background: linear-gradient(135deg, var(--maroon) 0%, var(--maroon-dark) 100%);
+    color: var(--white);
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+  
+  .about-card--accent h3,
+  .about-card--accent p {
+    color: rgba(255, 255, 255, 0.9);
+  }
+  
+  .about-card--accent .btn-primary {
+    background-color: var(--white);
+    color: var(--maroon);
+    border-color: var(--white);
+    flex-shrink: 0;
+  }
+  
+  .about-card--accent .btn-primary:hover {
+    background-color: var(--beige);
+    border-color: var(--beige);
+  }
+  
+  /* Emoji icon */
+  .card-icon {
+    font-size: 2rem;
+    margin-bottom: 14px;
+    display: block;
+  }
+  
+  .about-card--accent .card-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0;
+    flex-shrink: 0;
+  }
+  
+  .about-card h3 {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--text-dark);
+  }
+  
+  .about-card p {
+    font-size: 0.9rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+  }
+  
+  
+  /* ------------------------------------------------
+     9. SKILLS SECTION
+     ------------------------------------------------ */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+  }
+  
+  .skill-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 24px 28px;
+    border: 1px solid var(--beige-dark);
+    box-shadow: var(--shadow);
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .skill-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Top row: icon + name + percentage */
+  .skill-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+  
+  .skill-icon {
+    font-size: 1.3rem;
+  }
+  
+  .skill-name {
+    font-weight: 600;
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    flex: 1;
+  }
+  
+  .skill-pct {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--maroon);
+  }
+  
+  /* Progress bar track */
+  .skill-bar {
+    height: 6px;
+    background-color: var(--beige);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  /* Progress bar fill — width is set by JS */
+  .skill-fill {
+    height: 100%;
+    width: 0;           /* starts at 0, JS animates it */
+    background: linear-gradient(90deg, var(--maroon), #b84a62);
+    border-radius: 10px;
+    transition: width 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  
+  /* ------------------------------------------------
+     10. PROJECTS SECTION
+     ------------------------------------------------ */
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 28px;
+  }
+  
+  .project-card {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    border: 1px solid var(--beige-dark);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: transform var(--transition), box-shadow var(--transition);
+  }
+  
+  .project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+  }
+  
+  /* Large project number in the corner */
+  .project-number {
+    font-family: var(--font-heading);
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--beige-dark);
+    line-height: 1;
+  }
+  
+  .project-title {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.3;
+  }
+  
+  .project-desc {
+    font-size: 0.88rem;
+    color: var(--text-mid);
+    line-height: 1.75;
+    flex: 1;   /* lets the description grow so buttons always stay at the bottom */
+  }
+  
+  /* Tech tag pills */
+  .project-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  
+  .project-tags span {
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--maroon);
+    background-color: rgba(109, 31, 47, 0.08);
+    border: 1px solid rgba(109, 31, 47, 0.2);
+    padding: 4px 12px;
+    border-radius: 50px;
+  }
+  
+  /* Button row at the bottom of each card */
+  .project-buttons {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-top: auto;
+  }
+  
+  
+  /* ------------------------------------------------
+     11. CONTACT SECTION
+     ------------------------------------------------ */
+  .contact-wrapper {
+    display: grid;
+    grid-template-columns: 1.3fr 1fr;
+    gap: 48px;
+    align-items: start;
+  }
+  
+  /* Form container card */
+  .contact-form-wrap {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 40px;
+    border: 1px solid var(--beige-dark);
+    box-shadow: var(--shadow);
+  }
+  
+  /* Each label + input group */
+  .form-group {
+    margin-bottom: 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+  
+  .form-group label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-mid);
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    background: var(--beige);
+    border: 1px solid var(--beige-dark);
+    border-radius: var(--radius-sm);
+    padding: 13px 16px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: var(--text-dark);
+    outline: none;
+    transition: border-color var(--transition), box-shadow var(--transition);
+    resize: vertical;
+  }
+  
+  .form-group input::placeholder,
+  .form-group textarea::placeholder {
+    color: var(--text-light);
+  }
+  
+  /* Highlight border on focus */
+  .form-group input:focus,
+  .form-group textarea:focus {
+    border-color: var(--maroon);
+    box-shadow: 0 0 0 3px rgba(109, 31, 47, 0.1);
+    background: var(--white);
+  }
+  
+  /* Hidden success message */
+  .form-success {
+    display: none;
+    margin-top: 16px;
+    padding: 14px 18px;
+    background: rgba(109, 31, 47, 0.06);
+    border: 1px solid rgba(109, 31, 47, 0.2);
+    border-radius: var(--radius-sm);
+    color: var(--maroon);
+    font-size: 0.875rem;
+    text-align: center;
+  }
+  
+  /* Right side info panel */
+  .contact-info {
+    padding-top: 10px;
+  }
+  
+  .contact-intro {
+    font-size: 0.95rem;
+    color: var(--text-mid);
+    line-height: 1.8;
+    margin-bottom: 32px;
+  }
+  
+  .contact-list {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  
+  .contact-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+  
+  .contact-icon {
+    font-size: 1.2rem;
+    width: 42px;
+    height: 42px;
+    background-color: var(--beige);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  
+  .contact-list a {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--text-mid);
+    transition: color var(--transition);
+  }
+  
+  .contact-list a:hover {
+    color: var(--maroon);
+  }
+  
+  
+  /* ------------------------------------------------
+     12. FOOTER
+     ------------------------------------------------ */
+  .footer {
+    background-color: var(--text-dark);
+    padding: 28px 0;
+  }
+  
+  .footer-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  
+  .footer-logo {
+    font-family: var(--font-heading);
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: var(--beige);
+  }
+  
+  .footer-copy {
+    font-size: 0.82rem;
+    color: var(--text-light);
+  }
+  
+  
+  /* ------------------------------------------------
+     13. BACK TO TOP BUTTON
+     ------------------------------------------------ */
+  .back-to-top {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--maroon);
+    color: var(--white);
+    font-size: 1.1rem;
+    font-weight: 700;
+    border: none;
+    cursor: pointer;
+    z-index: 500;
+    /* Hidden until JS adds .visible */
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity var(--transition), transform var(--transition), background-color var(--transition);
+    box-shadow: 0 4px 16px rgba(109, 31, 47, 0.35);
+  }
+  
+  .back-to-top.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .back-to-top:hover {
+    background-color: var(--maroon-dark);
+  }
+  
+  
+  /* ================================================
+     14. RESPONSIVE STYLES
+     ================================================ */
+  
+  /* --- Tablet (≤ 900px) --- */
+  @media (max-width: 900px) {
+  
+    .hero {
+      flex-direction: column;
+      text-align: center;
+      padding: calc(var(--nav-height) + 50px) 32px 70px;
+    }
+  
+    .hero-content {
+      max-width: 100%;
+    }
+  
+    .hero-desc {
+      margin: 0 auto 40px;
+    }
+  
+    .hero-buttons {
+      justify-content: center;
+    }
+  
+    .hero-tags {
+      flex-direction: row;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  
+    .about-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .about-card--accent {
+      grid-column: 1;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+    }
+  
+    .contact-wrapper {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  
+  /* --- Mobile (≤ 640px) --- */
+  @media (max-width: 640px) {
+  
+    /* Show hamburger, hide desktop links */
+    .hamburger {
+      display: flex;
+    }
+  
+    .nav-links {
+      /* Mobile nav slides down from the top */
+      position: fixed;
+      top: var(--nav-height);
+      left: 0;
+      right: 0;
+      background-color: var(--white);
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      padding: 20px 0 30px;
+      border-bottom: 1px solid var(--beige-dark);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+  
+      /* Hidden by default */
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease;
+    }
+  
+    /* JS adds .open to show the menu */
+    .nav-links.open {
+      max-height: 400px;
+    }
+  
+    .nav-link {
+      padding: 14px 0;
+      font-size: 1rem;
+    }
+  
+    .navbar {
+      padding: 0 20px;
+    }
+  
+    .hero {
+      padding: calc(var(--nav-height) + 40px) 20px 60px;
+    }
+  
+    .section {
+      padding: 70px 0;
+    }
+  
+    .projects-grid,
+    .skills-grid {
+      grid-template-columns: 1fr;
+    }
+  
+    .contact-form-wrap {
+      padding: 28px 22px;
+    }
+  
+    .footer-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
